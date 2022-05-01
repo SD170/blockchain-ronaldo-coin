@@ -1,0 +1,15 @@
+{
+  "name": "ronaldo-coin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node ./dist/server.js",
+    "build": "tsc -p ."
+  },
+  "author": "SD17",
+  "license": "ISC",
+  "dependencies": {
+    "crypto-js": "^4.1.1"
+  }
+}
