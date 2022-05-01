@@ -11,5 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "crypto-js": "^4.1.1"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.1.1",
+    "@types/node": "^17.0.30"
   }
 }
