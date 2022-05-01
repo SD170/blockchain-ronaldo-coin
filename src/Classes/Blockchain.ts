@@ -1,8 +1,7 @@
 import Block from "../Classes/Block";
-import { SHA256 } from 'crypto-js';
 
 
-class Blockchain {
+export default class Blockchain {
     public chain: Block[];
 
     constructor() {
@@ -19,7 +18,7 @@ class Blockchain {
      * @returns the genesis block
      */
     createGenesisBlock(): Block {
-        return new Block(0, new Date(), "Genesis block", "0");
+        return new Block(0, Date.now(), "Genesis block", "0");
     }
 
     /**
@@ -29,6 +28,10 @@ class Blockchain {
         return this.chain[this.chain.length - 1];
     }
 
+    /**
+     * Adds a new block to the blockchain.
+     * @param newBlock an instance of a block
+     */
     addBlock(newBlock: Block) {
         newBlock.previousBlockHash = this.getLatestBlock().blockHash;
         // each time we change any property of a block we need to re-calculate it's hash.
@@ -41,10 +44,33 @@ class Blockchain {
          * 3) check if the state transition is valid or not.
          * etc.
          */
-        
-        // timestamp check
-        if(newBlock.timestamp > this.getLatestBlock().timestamp && (newBlock.timestamp.valueOf() - this.getLatestBlock().timestamp.valueOf()) < 7.2e+6){
-            this.chain.push(newBlock);
+
+        // timestamp check:
+        // if (newBlock.timestamp > this.getLatestBlock().timestamp) {
+        this.chain.push(newBlock);
+        // }
+    }
+
+    /**
+     * @returns true/false by checking the whole blockchain for few parameters.
+     */
+    validateBlockchain(): boolean {
+        for (let i = 1; i < this.chain.length; i++) {
+            const currentBlock = this.chain[i];
+            const previousBlock = this.chain[i - 1];
+
+            // if the hash on the current block is invalid
+            if (currentBlock.blockHash !== currentBlock.calculateBlockHash()) {
+                return false;
+            }
+
+            // if the previousBlockHash of the current block is not equal to
+            // previousBlock's blockHash.
+            if (currentBlock.previousBlockHash !== previousBlock.blockHash) {
+                return false;
+            }
         }
+
+        return true;
     }
 }

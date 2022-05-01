@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node ./dist/server.js",
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "dev": "ts-node ./src/server.ts"
   },
   "author": "SD17",
   "license": "ISC",
