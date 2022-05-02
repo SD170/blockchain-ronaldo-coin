@@ -10,7 +10,9 @@ const ronaldoCoin = new Blockchain();
 /**
  * @params index, timestamp, data
  */
+console.log(`Mining block 1`);
 ronaldoCoin.addBlock(new Block(1, Date.now(), JSON.stringify({ transactions: ["few transactions"] })));
+console.log(`Mining block 2`);
 ronaldoCoin.addBlock(new Block(2, Date.now(), JSON.stringify({ transactions: ["few transactions"] })));
 
 

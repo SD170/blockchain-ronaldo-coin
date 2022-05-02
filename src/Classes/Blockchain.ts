@@ -3,12 +3,17 @@ import Block from "../Classes/Block";
 
 export default class Blockchain {
     public chain: Block[];
+    public difficulty: number;
 
     constructor() {
         this.chain = [];
         // initializing the chain with genesisblock
         this.chain.push(this.createGenesisBlock());
 
+        // setting adefault difficulty
+        // for Bitcoin it's set as a variable, so that
+        // 1 block generates every 10 mins.
+        this.difficulty=2;
     }
 
     /**
@@ -33,9 +38,20 @@ export default class Blockchain {
      * @param newBlock an instance of a block
      */
     addBlock(newBlock: Block) {
+        // setting previousBlockHash
         newBlock.previousBlockHash = this.getLatestBlock().blockHash;
-        // each time we change any property of a block we need to re-calculate it's hash.
-        newBlock.blockHash = newBlock.calculateBlockHash();
+        
+        /**
+         * Before PoW
+         */
+        // // each time we change any property of a block we need to re-calculate it's hash.
+        // newBlock.blockHash = newBlock.calculateBlockHash();
+
+        /**
+         * After PoW
+         */
+        newBlock.mineBlock(this.difficulty);
+
         // pushing the new block onto the chain.
         /**
          * In case of a real blockchain there are a lot of checks (for bitcoin blockchain):
