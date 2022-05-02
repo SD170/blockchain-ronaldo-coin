@@ -1,18 +1,16 @@
 import { SHA256 } from "crypto-js";
-
+import Transaction from "./Transaction";
 
 
 export default class Block {
-    public index: number;                // for easily searching a block
     public timestamp: number;            // timestamp in milisecond
-    public data: string;                 // any kind of data that can reside on the block
+    public transactions: Transaction[];  // Transactions array
     public previousBlockHash: string;    // hash of the previous block
     public blockHash: string;            // current block's hash
     public nonce: number;                // Random number needed for PoW
-    constructor(index: number, timestamp: number, data: string, previousBlockHash: string = "") {
-        this.index = index;
+    constructor(timestamp: number, transactions: Transaction[], previousBlockHash: string = "") {
         this.timestamp = timestamp;
-        this.data = data;
+        this.transactions = transactions;
         this.previousBlockHash = previousBlockHash;
         this.blockHash = this.calculateBlockHash();
         this.nonce = 0;
@@ -23,8 +21,8 @@ export default class Block {
      * @returns the hash of the block
      */
     calculateBlockHash(): string {
-        return SHA256(this.index + this.timestamp.toLocaleString()
-            + this.data + this.previousBlockHash + this.nonce).toString();
+        return SHA256(this.timestamp.toLocaleString() + this.transactions
+            + this.previousBlockHash + this.nonce).toString();
     }
 
     mineBlock(difficulty: number) {
@@ -38,12 +36,12 @@ export default class Block {
         /**
          * Increase the nonce and calculate the block hash until condition meets
          */
-        while (!this.blockHash.startsWith(nZeros)){
+        while (!this.blockHash.startsWith(nZeros)) {
             this.nonce++;
             this.blockHash = this.calculateBlockHash();
         }
-        
-        console.log(`Block ${this.index} mined`);
+
+        console.log(`Block mined`);
     }
 
 
@@ -52,10 +50,9 @@ export default class Block {
      */
     displayBlock() {
         console.log(JSON.stringify({
-            index: this.index,
             nonce: this.nonce,
             timestamp: new Date(this.timestamp).toLocaleString(),
-            data: this.data,
+            transactions: this.transactions,
             previousBlockHash: this.previousBlockHash,
             blockHash: this.blockHash
         }, null, 2));

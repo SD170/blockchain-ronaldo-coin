@@ -1,19 +1,37 @@
 import Block from "./Classes/Block";
 import Blockchain from "./Classes/Blockchain";
+import Transaction from "./Classes/Transaction";
 
 /**
  * Creating instance of the blockchain.
  */
 const ronaldoCoin = new Blockchain();
 
+// creating a few transactions
+
+ronaldoCoin.createTransaction({ fromAddress: "messi", toAddress: "mbappe", amount: 20, data:null })
+ronaldoCoin.createTransaction({ fromAddress: "benzema", toAddress: "marcelo", amount: 50, data:null })
+
+// creating a new block with these transactions.
+ronaldoCoin.addBlockWithTransactions("minerRonaldo")
+
+
+// creating a few transactions
+
+ronaldoCoin.createTransaction({ fromAddress: "lewandowski", toAddress: "muller", amount: 200, data:null })
+ronaldoCoin.createTransaction({ fromAddress: "kane", toAddress: "son", amount: 10, data:null })
+
+// creating a new block with these transactions.
+ronaldoCoin.addBlockWithTransactions("minerRonaldo")
+
 // adding a few blocks
 /**
  * @params index, timestamp, data
  */
-console.log(`Mining block 1`);
-ronaldoCoin.addBlock(new Block(1, Date.now(), JSON.stringify({ transactions: ["few transactions"] })));
-console.log(`Mining block 2`);
-ronaldoCoin.addBlock(new Block(2, Date.now(), JSON.stringify({ transactions: ["few transactions"] })));
+// console.log(`Mining block 1`);
+// ronaldoCoin.addBlock(new Block(Date.now(), { transactions: [{ fromAddress: "messi", toAddress: "mbappe", amount: 20 }] }));
+// console.log(`Mining block 2`);
+// ronaldoCoin.addBlock(new Block(Date.now(), { transactions: [{ fromAddress: "benzema", toAddress: "marcelo", amount: 50 }] }));
 
 
 console.log("***Blockchain: ***");
