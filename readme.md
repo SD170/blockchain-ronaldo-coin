@@ -1,19 +1,19 @@
 # Ronaldo-Coin
 ## _A blockchain made using TypeScript_
 
-This is a demo blockchain which contains features such as Proof of work(PoW) [with specific difficulty], signing transactions(with private key), verifying transactions(with public key) etc.
+This is a demo blockchain contains features such as Proof of Work(PoW) [with specific difficulty], signing transactions(with private key), verifying transactions(with public key), etc.
 
 Made using TypeScript, also compiled down to javascript.
-#### You can check the typescript source code in _**./src**_.
+#### You can check the typescript source code in [_**./src**_](https://github.com/SD170/blockchain-ronaldo-coin/tree/master/src).
 
 ## Features
 
-- Proof of work(PoW) [with specific difficulty].
+- Proof of Work(PoW) [with specific difficulty].
 - Create public/private keys.
 - Signing transactions(with private key).
 - Verifying transactions(with public key).
-- Checking balance of a specific address.
-- Checking validity of the blockchain.
+- Checking the balance of a specific address.
+- Checking the validity of the blockchain.
 - Visualizing the whole blockchain.
 
 
@@ -33,7 +33,7 @@ npm start
 ```
 
 #### 4) Generate new key-pair(not mandatory):
-You can genarate new public/private key pair
+You can generate a new public/private key pair
 ```
 node ./dist/keyGen.js 
 ```
